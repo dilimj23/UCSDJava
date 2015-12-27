@@ -33,7 +33,13 @@ public class LandQuakeMarker extends EarthquakeMarker {
 		// and how it is set in the EarthquakeMarker constructor
 		
 		// TODO: Implement this method
-		
+		//pg.pushStyle();
+		pg.ellipse(x, y, 2 * radius, 2 * radius);
+		if (this.getStringProperty("age").equals("Past Day")) {
+			pg.line(x - radius, y - radius, x + radius, y + radius);
+			pg.line(x + radius, y - radius, x - radius, y + radius);
+		}
+		//pg.popStyle();
 	}
 	
 

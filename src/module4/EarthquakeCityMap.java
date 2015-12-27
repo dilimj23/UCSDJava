@@ -14,6 +14,7 @@ import de.fhpotsdam.unfolding.marker.MultiMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import module5.CityMarker;
 import parsing.ParseFeed;
 import processing.core.PApplet;
 
@@ -133,6 +134,8 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Update this method as appropriate
 	private void addKey() {	
 		// Remember you can use Processing's graphics methods here
+		int xbase = 25;
+		int ybase = 50;
 		fill(255, 250, 240);
 		rect(25, 50, 150, 250);
 		
@@ -141,17 +144,50 @@ public class EarthquakeCityMap extends PApplet {
 		textSize(12);
 		text("Earthquake Key", 50, 75);
 		
-		fill(color(255, 0, 0));
-		ellipse(50, 125, 15, 15);
-		fill(color(255, 255, 0));
-		ellipse(50, 175, 10, 10);
-		fill(color(0, 0, 255));
-		ellipse(50, 225, 5, 5);
+//		fill(color(255, 0, 0));
+//		ellipse(50, 125, 15, 15);
+//		fill(color(255, 255, 0));
+//		ellipse(50, 175, 10, 10);
+//		fill(color(0, 0, 255));
+//		ellipse(50, 225, 5, 5);
+//		
+//		fill(0, 0, 0);
+//		text("5.0+ Magnitude", 75, 125);
+//		text("4.0+ Magnitude", 75, 175);
+//		text("Below 4.0", 75, 225);
+		fill(150, 30, 30);
+		int tri_xbase = xbase + 35;
+		int tri_ybase = ybase + 50;
+		triangle(tri_xbase, tri_ybase-CityMarker.TRI_SIZE, tri_xbase-CityMarker.TRI_SIZE, 
+				tri_ybase+CityMarker.TRI_SIZE, tri_xbase+CityMarker.TRI_SIZE, 
+				tri_ybase+CityMarker.TRI_SIZE);
+		fill(255, 255, 255);
+		ellipse(xbase + 35, ybase + 75, 2*CityMarker.TRI_SIZE, 2*CityMarker.TRI_SIZE);
+		rect(xbase + 35 - CityMarker.TRI_SIZE, ybase + 100 - CityMarker.TRI_SIZE, 2 * CityMarker.TRI_SIZE, 2 * CityMarker.TRI_SIZE);
+		
+		fill(255, 255, 0);
+		ellipse(xbase + 35, 200, 2*CityMarker.TRI_SIZE, 2*CityMarker.TRI_SIZE);
+		
+		fill(0, 0, 255);
+		ellipse(xbase + 35, 225, 2*CityMarker.TRI_SIZE, 2*CityMarker.TRI_SIZE);
+		
+		fill(255, 0, 0);
+		ellipse(xbase + 35, 250, 2*CityMarker.TRI_SIZE, 2*CityMarker.TRI_SIZE);
+		
+		fill(255, 255, 255);
+		ellipse(xbase + 35, 275, 2*CityMarker.TRI_SIZE, 2*CityMarker.TRI_SIZE);
+		line(xbase+35-CityMarker.TRI_SIZE, 275-CityMarker.TRI_SIZE, xbase+35+CityMarker.TRI_SIZE, 275+CityMarker.TRI_SIZE);
+		line(xbase+35+CityMarker.TRI_SIZE, 275-CityMarker.TRI_SIZE, xbase+35-CityMarker.TRI_SIZE, 275+CityMarker.TRI_SIZE);
 		
 		fill(0, 0, 0);
-		text("5.0+ Magnitude", 75, 125);
-		text("4.0+ Magnitude", 75, 175);
-		text("Below 4.0", 75, 225);
+		text("City Marker", 75, 100);
+		text("Land Quake", 75, 125);
+		text("Ocean Quake", 75, 150);
+		text("Size ~ Magnitude", 50, 175);
+		text("Shallow", 75, 200);
+		text("Intermediate", 75, 225);
+		text("Deep", 75, 250);
+		text("Past Day", 75, 275);
 	}
 
 	
