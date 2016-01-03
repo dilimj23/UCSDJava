@@ -95,7 +95,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 	{
 		// TODO: Implement this method
 		if (this.isSelected()) {
-			String quakeType = this.getStringProperty("title");
+			String quakeType = this.getTitle();
 			pg.pushStyle();
 			pg.fill(0,0,0);
 			pg.text(quakeType, x, y);

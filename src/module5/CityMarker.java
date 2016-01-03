@@ -53,7 +53,7 @@ public class CityMarker extends CommonMarker {
 		
 		// TODO: Implement this method
 		if (this.isSelected()) {
-			String cityInfo = this.getStringProperty("name") + ", " + this.getStringProperty("country") + ", " + this.getStringProperty("population");
+			String cityInfo = this.getCity() + ", " + this.getCountry() + ", " + this.getPopulation();
 			pg.pushStyle();
 			pg.fill(0,0,0);
 			pg.text(cityInfo, x, y);

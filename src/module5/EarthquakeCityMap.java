@@ -146,6 +146,7 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		// TODO: Implement this method
+		if (lastSelected != null) { return; }
 		for (Marker marker : markers) {
 			if (marker.isInside(map, mouseX, mouseY)) {
 				marker.setSelected(true);
@@ -166,9 +167,74 @@ public class EarthquakeCityMap extends PApplet {
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
+//		for (Marker citymarker : cityMarkers) {
+//			citymarker.setHidden(true);
+//		}
+		if (lastClicked != null) {
+			unhideMarkers();
+			lastClicked = null;
+		} else if (lastClicked == null) {
+			checkClickedEarthquakes();
+			if (lastClicked == null) {
+				checkClickedCities();
+			}
+		}
 	}
 	
 	
+	private void checkClickedCities() {
+		// TODO Auto-generated method stub
+		if (lastClicked != null) { return; }
+		for (Marker m : cityMarkers) {
+			CityMarker marker = (CityMarker)m;
+			if (!marker.isHidden() && marker.isInside(map, mouseX, mouseY)) {
+				lastClicked = marker;
+				// hide all other cities
+				for (Marker mhide : cityMarkers) {
+					if (mhide != lastClicked) {
+						mhide.setHidden(true);
+					}
+				}
+				// hide all earthquakes which are not affecting this city
+				for (Marker mhide : quakeMarkers) {
+					EarthquakeMarker quakeMarker = (EarthquakeMarker)mhide;
+					if (quakeMarker.getDistanceTo(marker.getLocation()) > quakeMarker.threatCircle()) {
+						quakeMarker.setHidden(true);
+					}
+				}
+				return;
+			}
+		}
+		
+	}
+
+
+	private void checkClickedEarthquakes() {
+		// TODO Auto-generated method stub
+		if (lastClicked != null) { return; }
+		for (Marker m : quakeMarkers) {
+			EarthquakeMarker marker = (EarthquakeMarker)m;
+			if (!marker.isHidden() && marker.isInside(map, mouseX, mouseY)) {
+				lastClicked = marker;
+				// hide all other earthquakes
+				for (Marker mhide : quakeMarkers) {
+					if (mhide != lastClicked) {
+						mhide.setHidden(true);
+					}
+				}
+				// hide all cities which are not in this quake's thread circle
+				for (Marker mhide : cityMarkers) {
+					if (mhide.getDistanceTo(marker.getLocation()) > marker.threatCircle()) {
+						mhide.setHidden(true);
+					}
+				}
+				return;
+			}
+		}
+		
+	}
+
+
 	// loop over and unhide all markers
 	private void unhideMarkers() {
 		for(Marker marker : quakeMarkers) {
